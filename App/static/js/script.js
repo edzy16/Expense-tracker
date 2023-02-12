@@ -33,6 +33,10 @@ window.onload = function () {
         type: "credit",
       }),
     });
+    if (!response.ok) {
+      console.log(`Error: ${response.status} ${response.statusText}`);
+      return;
+    }
 
     // Get the updated data from the API
     const transactionsResponse = await response.json();
@@ -78,6 +82,9 @@ window.onload = function () {
       }),
     });
 
+    const responseData = await response.json();
+    console.log("Response data:", responseData);
+
     // Get the updated data from the API
     const transactions = await response.json();
 
@@ -97,9 +104,7 @@ window.onload = function () {
 
       const transactionId = event.target.getAttribute("href").split("/").pop();
 
-      fetch(`http://localhost:8000/transactions/${transactionId}/`, {
-        method: "DELETE",
-      })
+      fetch(`/api/transactions/${transactionId}/`, { method: "DELETE" })
         .then((response) => {
           if (response.ok) {
             return response.json();
