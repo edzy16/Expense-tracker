@@ -1,58 +1,96 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-    <head>
+  <head>
     <title>Expense Tracker</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">    </head>
-    <body>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/style.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script type="text/javascript" src="/static/js/script.js"></script>
+  </head>
+  <body>
     <header>
-        <div class="leftheader">
-            <p class="header">Expense Tracker</p>
-            <p class="home">Home</p>
-        </div>
-        <div class="rightheader">
-            <p class="home">Hi ${{ user }}</p>
-            <button class="logoutbutton" onclick="/logout">Logout</button>
-        </div>
+      <div class="leftheader">
+        <p class="header">Expense Tracker</p>
+        <p class="home">Home</p>
+      </div>
+      <div class="rightheader">
+        <p class="home">Hi ${{ user }}</p>
+        <button class="logoutbutton" onclick="/logout">Logout</button>
+      </div>
     </header>
     <main>
-        <h1>Expense Tracker</h1>
-        <div class="entries">
-            <input class="entry" type="text" name="amount" placeholder="Amount">
-            <input class="entry" type="text" name="description" placeholder="Description">
-            <input class="entry" type="date" id="datepicker" placeholder="dd-mm-yyyy">
-            <button class="creditbutton" type="credit">Credit</button>
-        </div>
-        <div class="entries">
-            <input class="entry" type="text" name="amount" placeholder="Amount">
-            <input class="entry" type="text" name="description" placeholder="Description">
-            <input class="entry" type="date" id="datepicker" placeholder="dd-mm-yyyy">
-            <button class="debitbutton" type="debit">Debit</button>
-        </div>
-        <div>
+      <h1>Expense Tracker</h1>
+      <div class="entries">
+        <input class="entry" type="text" name="amount" placeholder="Amount" />
+        <input
+          class="entry"
+          type="text"
+          name="description"
+          placeholder="Description"
+        />
+        <input
+          class="entry"
+          type="date"
+          id="datepicker"
+          placeholder="dd-mm-yyyy"
+        />
+        <button class="creditbutton" type="credit">Credit</button>
+      </div>
+      <div class="entries">
+        <input class="entry" type="text" name="amount" placeholder="Amount" />
+        <input
+          class="entry"
+          type="text"
+          name="description"
+          placeholder="Description"
+        />
+        <input
+          class="entry"
+          type="date"
+          id="datepicker"
+          placeholder="dd-mm-yyyy"
+        />
+        <button class="debitbutton" type="debit">Debit</button>
+      </div>
+      <div>
         <p class="balance">Balance:${{ balance }}</p>
 
         <table>
-            <tr>
+          <tr>
             <th>Date</th>
             <th>Description</th>
             <th>Debit</th>
             <th>Credit</th>
             <th>Balance</th>
             <th></th>
-            </tr>
-            {% for transaction in transactions %}
-            <tr>
+          </tr>
+          {% for transaction in transactions %}
+          <tr>
             <td>{{ transaction.date }}</td>
             <td>{{ transaction.descriptions }}</td>
             <td>{{ transaction.debit }}</td>
             <td>{{ transaction.credit }}</td>
             <td>{{ transaction.balance }}</td>
-            <td><a class="deletebutton" href="/delete/{{ transaction.id }}">Delete</a></td>
-            </tr>
-            {% endfor %}
+            <td>
+              <a class="deletebutton" href="/delete/{{ transaction.id }}"
+                >Delete</a
+              >
+            </td>
+          </tr>
+          {% endfor %}
         </table>
-        </div>
+      </div>
     </main>
-    </body>
+  </body>
 </html>
